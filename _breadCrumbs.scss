@@ -1,0 +1,162 @@
+/* -------------------------------- 
+Primary style
+-------------------------------- */
+
+a {
+  color: #78909c;
+  text-decoration: none;
+}
+
+section {
+  /* used just to separate different styles */
+  color: #2c3f4c;
+  background-color: #ffffff;
+  /* used just to separate different styles */
+  border-bottom: 1px solid #e6e6e6;
+}
+
+/* -------------------------------- 
+Basic Style
+-------------------------------- */
+
+.cd-breadcrumb,
+.cd-multi-steps {
+  width: 100%;
+  padding: 0 1em;
+  background-color: white;
+  border-radius: 0.25em;
+  text-align: left;
+
+  li {
+    display: inline-block;
+    margin: 0.5em 0;
+
+    &::after {
+      /* this is the separator between items */
+      display: inline-block;
+      content: '\00bb';
+      margin: 0 0.6em;
+      font-size: 1.2rem;
+      color: #959fa5;
+    }
+
+    &:last-of-type::after {
+      /* hide separator after the last item */
+      display: none;
+    }
+  }
+
+  li > * {
+    /* single step */
+    display: inline-block;
+    font-size: 1rem;
+  }
+
+  li.current > * {
+    /* selected step */
+    color: mat-color($mat-orange, 400);
+  }
+
+  .no-touch & a:hover {
+    /* steps already visited */
+    color: mat-color($mat-orange, 400);
+  }
+
+  &.custom-separator li::after {
+    /* replace the default arrow separator with a custom icon */
+    content: '';
+    height: 16px;
+    width: 16px;
+    background: url(./assets/cd-custom-separator.svg) no-repeat center center;
+    vertical-align: middle;
+  }
+
+  &.custom-icons li > *::before {
+    /* add a custom icon before each item */
+    content: '';
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    margin-right: 0.4em;
+    margin-top: -2px;
+    background: url(./assets/cd-custom-icons-01.svg) no-repeat 0 0;
+    vertical-align: middle;
+  }
+
+  &.custom-icons li:not(.current):nth-of-type(2) > *::before {
+    /* change custom icon using image sprites */
+    background-position: -20px 0;
+  }
+
+  &.custom-icons li:not(.current):nth-of-type(3) > *::before {
+    background-position: -40px 0;
+  }
+
+  &.custom-icons li:not(.current):nth-of-type(4) > *::before {
+    background-position: -60px 0;
+  }
+
+  &.custom-icons li.current:first-of-type > *::before {
+    /* change custom icon for the current item */
+    background-position: 0 -20px;
+  }
+
+  &.custom-icons li.current:nth-of-type(2) > *::before {
+    background-position: -20px -20px;
+  }
+
+  &.custom-icons li.current:nth-of-type(3) > *::before {
+    background-position: -40px -20px;
+  }
+
+  &.custom-icons li.current:nth-of-type(4) > *::before {
+    background-position: -60px -20px;
+  }
+}
+
+/* -------------------------------- 
+Add a counter to the multi-steps indicator 
+-------------------------------- */
+
+.cd-multi-steps.count li {
+  counter-increment: steps;
+}
+
+.cd-multi-steps.count li > *::before {
+  content: counter(steps) ' - ';
+}
+
+@include MQ(M) {
+  .cd-multi-steps.text-top.count li > *::before,
+  .cd-multi-steps.text-bottom.count li > *::before {
+    /* this is the spot indicator */
+    content: counter(steps);
+    height: 26px;
+    width: 26px;
+    line-height: 26px;
+    font-size: 1rem;
+    color: $rv-title-color;
+  }
+
+  .cd-multi-steps.text-top.count li:not(.current) em::before,
+  .cd-multi-steps.text-bottom.count li:not(.current) em::before {
+    /* steps not visited yet - counter color */
+    color: $rv-secondary-color;
+  }
+
+  .cd-multi-steps.text-top.count li::after {
+    bottom: 11px;
+  }
+
+  .cd-multi-steps.text-top.count li > * {
+    padding-bottom: 34px;
+  }
+
+  .cd-multi-steps.text-bottom.count li::after {
+    top: 11px;
+  }
+
+  .cd-multi-steps.text-bottom.count li > * {
+    padding-top: 34px;
+  }
+}

@@ -1,0 +1,51 @@
+@import '~@angular/material/theming';
+@import 'theme';
+
+$fa-font-path: '../node_modules/@fortawesome/fontawesome-free-webfonts/webfonts';
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+$border-color: mat-color($rv-theme-accent, 300);
+$rv-peregraph-color: mat-color($mat-grey, 500);
+$primary-color: #ffc107;
+$font-family: Poppins;
+$font-family-bold: PoppinsBold;
+$font-family-semi-bold: PoppinsSemiBold;
+$font-family-extra-bold: PoppinsExtraBold;
+$font-family-Thin: PoppinsThin;
+$rv-bg-color: #eff4f9;
+$rv-bg-color-light: #f6f9fb;
+$rv-border: #ebebeb;
+$rv-title-color: #42a5f5;
+$rv-sub-font-color: #e55801;
+$rv-sub-font-color-dark: #b93b2c;
+$rv-border-green: #57b79c;
+$rv-green: #01ac5a;
+$rv-red: red;
+$rv-white: white;
+$active-menu-color: rgb(10, 10, 10);
+$rv-outline-icons-color: #32aeea;
+$rv-disabled-color: #d1c6c1;
+$main-font-family: Poppins;
+$rv-gray-border-color: #e0e0e0;
+$rv-green-icon-color: #80bb65;
+$rv-icon-color: #80868b;
+$rv-font-span: #9e9e9e;
+$rv-font-gray: #78909c;
+$rv-secondary-color: #4a90e2;
+$main-font-family: Poppins;
+$rv-thick-border-color: #9fbbd2;
+
+$top-toolbar-height: 60px;
+$horizontal-menu-height: 64px;
+$footer-toolbar-height: 10px;
+$mat-drawer-side-bar-width: 218px;
+$sidenav-width: 260px;
+$compact-sidenav-width: 170px;
+$mini-sidenav-width: 66px;
+$mat-nav-profile-drower-width: 250px;

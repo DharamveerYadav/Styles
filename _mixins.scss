@@ -1,0 +1,124 @@
+@import '~@angular/material/theming';
+@import 'colors';
+@import 'functions';
+@import 'variables';
+@import '~@angular/flex-layout/mq';
+
+@mixin box-shadow($x-axis: 0, $y-axis: 1px, $blur: 2px, $spread: 0px, $color: $default) {
+  box-shadow: $x-axis $y-axis $blur $color;
+}
+
+@mixin layout-lt-md() {
+  @include layout-bp(sm) {
+    @content;
+  }
+  @include layout-bp(xs) {
+    @content;
+  }
+}
+
+@mixin layout-gt-md() {
+  @include layout-bp(lg) {
+    @content;
+  }
+  @include layout-bp(xl) {
+    @content;
+  }
+}
+
+@mixin menu-level-padding($direction) {
+  $elem: '';
+
+  @for $i from 2 through 10 {
+    $elem: if($i==2, '.sub-menu', selector-nest($elem, '.sub-menu'));
+
+    #{$elem + ' .mat-button'} {
+      @if $direction== 'rtl' {
+        padding-right: 20px * $i;
+      } @else {
+        padding-left: 20px * $i;
+      }
+    }
+  }
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+@mixin push--auto($vertically: false) {
+  @if $vertically {
+    margin: {
+      top: $vertically;
+      bottom: $vertically;
+      left: auto;
+      right: auto;
+    }
+  } @else {
+    margin: {
+      left: auto;
+      right: auto;
+    }
+  }
+}
+
+@mixin font-roboto($size: false, $colour: false, $weight: false, $lh: false) {
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+
+  @if $size {
+    font-size: $size;
+  }
+
+  @if $colour {
+    color: $colour;
+  }
+
+  @if $weight {
+    font-weight: $weight;
+  }
+
+  @if $lh {
+    line-height: $lh;
+  }
+}
+
+@mixin font-poppins($fontFamilyName, $size: false, $colour: false, $weight: false, $lh: false) {
+  font-family: $fontFamilyName;
+
+  @if $size {
+    font-size: $size;
+  }
+
+  @if $colour {
+    color: $colour;
+  }
+
+  @if $weight {
+    font-weight: $weight;
+  }
+
+  @if $lh {
+    line-height: $lh;
+  }
+}
+
+// center vertically and/or horizontally an absolute positioned element
+
+@mixin center($xy: xy) {
+  @if $xy==xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    @include transform(translateX(-50%) translateY(-50%));
+  } @else if $xy==x {
+    left: 50%;
+    right: auto;
+    @include transform(translateX(-50%));
+  } @else if $xy==y {
+    top: 50%;
+    bottom: auto;
+    @include transform(translateY(-50%));
+  }
+}

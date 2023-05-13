@@ -1,0 +1,45 @@
+$rv-bezier-easein-left: cubic-bezier(0.45, 0.25, 0.60, 0.95);
+$rv-bezier-easeout-left: cubic-bezier(0.95, 0.60, 0.25, 0.45);
+
+/**
+  * Builds out requisite variety animation keyframe alias and associated keyframes
+  * @param { string } name of the event
+  * @param { CssProperty } element name of the css property to use
+  * @param { Element } from css element to use in the keyframe 
+  * @param { Element } to css element to use in the keyframe
+  * @memberof ActiveComponent
+*/
+@mixin rv-keyframe($name, $element, $from, $to) {
+  @keyframes rv-#{$name} {
+    from {
+        #{$element}: #{$from};
+    }
+    to {
+        #{$element}: #{$to};
+    }
+  }
+}
+
+/**
+  * Utility to help build out rv custom animation transitions
+  * @param { CssKeyframe }  rv-keyframe => specialized keyframe for requisite variety to use in animation => rv-slide-left | rv-slide-right
+  * @param { CssTime } time of animation effect in seconds or milliseconds => number + s | ms
+  * @param { CssTimingFunction } timing-function used => linear | cubic-bezier-timing-function | step-timing-function
+  * @param { CssFillMode } fill-mode => none | forwards | backwards | both
+*/
+@mixin rv-animation($rv-keyframe, $time, $timing-function, $fill-mode) {
+  animation: $rv-keyframe $time $timing-function $fill-mode;
+}
+
+// create custom requisite variety custom keyframes for ease in/out animation 
+@include rv-keyframe(easein-left, width, 0, 90%);
+@include rv-keyframe(easeout-left, width, 90%, 0);
+
+// generate helper classes 
+.rv-easein-left {
+    @include rv-animation(rv-easein-left, 300ms, $rv-bezier-easein-left, forwards);
+}
+
+.rv-easeout-left {
+    @include rv-animation(rv-easeout-left, 300ms, $rv-bezier-easeout-left, backwards);
+}

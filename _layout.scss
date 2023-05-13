@@ -1,0 +1,80 @@
+@import 'mixins';
+@import '~@angular/flex-layout/mq';
+$S: 480px;
+$M: 768px;
+$L: 1170px;
+$headings: h1 h2 h3 h4 h5 h6;
+$index: 2.5;
+@each $heading in $headings {
+    #{$heading} {
+        font-size: $index + rem;
+        color: mat-color($rv-theme-accent, A400);
+        padding: 5px;
+        line-height: $index + rem;
+        margin-top: 10px;
+        @include layout-bp(xs) {
+            text-align: center;
+            font-size: $index - .2 + rem;
+        }
+    }
+    $index: $index - .3;
+}
+
+// media queries
+@mixin MQ($canvas) {
+    @if $canvas==S {
+        @media only screen and (min-width: $S) {
+            @content;
+        }
+    }
+    @else if $canvas==M {
+        @media only screen and (min-width: $M) {
+            @content;
+        }
+    }
+    @else if $canvas==L {
+        @media only screen and (min-width: $L) {
+            @content;
+        }
+    }
+}
+
+p {
+    @include font-poppins($font-family, 20px, mat-color($mat-grey, 500), 300);
+    color: mat-color($mat-grey, 500);
+}
+
+p,
+label,
+span,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+b {
+    &.primary {
+        color: mat-color($rv-theme-primary, A400) !important;
+    }
+    &.accent {
+        color: mat-color($rv-theme-accent, 300) !important;
+    }
+    &.warn {
+        color: mat-color($rv-theme-warn, 700) !important;
+    }
+}
+
+.fa {
+    color: mat-color($rv-theme-accent, 600);
+}
+
+// move to step-container  once all steps leverage step-container
+.step-title {
+    margin: 30px 5%;
+    text-align: center;
+}
+
+.w100 {
+    width: 100%;
+}
